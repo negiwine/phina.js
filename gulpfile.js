@@ -12,9 +12,9 @@ var config = require('./gulp/config');
 // watch
 gulp.task('watch', function() {
   config.watch.target.forEach(function(task) {
-    gulp.watch(config[task].target, [task]);
+    gulp.watch(config[task].target, gulp.series(task));
   });
 });
 
 // default tasks
-gulp.task('default', ['build', 'uglify', 'watch']);
+gulp.task('default', gulp.series('build', 'uglify', 'watch'));
